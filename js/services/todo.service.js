@@ -1,8 +1,4 @@
-var gTodos = [
-    {id: 't101', txt: 'Learn HTML', isDone: false},
-    {id: 't102', txt: 'Master CSS', isDone: true},
-    {id: 't103', txt: 'Do JS', isDone: false}
-]
+var gTodos = _createTodos();
 
 var gFilterBy = 'all'
 
@@ -23,6 +19,7 @@ function removeTodo(todoId) {
         return todo.id === todoId
     })
     gTodos.splice(idx, 1);
+    _saveTodosToStorage();
 }
 
 function addTodo(txt) {
@@ -32,6 +29,7 @@ function addTodo(txt) {
         isDone: false
     }
     gTodos.unshift(todo);
+    _saveTodosToStorage()
 }
 
 function toggleTodo(todoId) {
@@ -39,6 +37,7 @@ function toggleTodo(todoId) {
         return todo.id === todoId
     })
     todo.isDone = !todo.isDone;
+    _saveTodosToStorage();
 }
 
 function setFilterBy(filterBy) {
@@ -53,4 +52,22 @@ function getActiveCount() {
         return !todo.isDone
     })
     return activeTodos.length;
+}
+
+
+function _saveTodosToStorage() {
+    saveToStorage('todoDB', gTodos)
+}
+
+function _createTodos() {
+
+    var todos = loadFromStorage('todoDB')
+    if (!todos) {
+        todos = [
+            {id: 't101', txt: 'Learn HTML', isDone: false},
+            {id: 't102', txt: 'Master CSS', isDone: true},
+            {id: 't103', txt: 'Do JS', isDone: false}
+        ]
+    }
+    return todos;
 }
