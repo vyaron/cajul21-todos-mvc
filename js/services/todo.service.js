@@ -18,7 +18,6 @@ function getTodosForDisplay() {
     return todos;
 }
 
-
 function removeTodo(todoId) {
     var idx = gTodos.findIndex(function(todo){
         return todo.id === todoId
@@ -44,4 +43,14 @@ function toggleTodo(todoId) {
 
 function setFilterBy(filterBy) {
     gFilterBy = filterBy
+}
+
+function getTotalCount() {
+    return gTodos.length
+}
+function getActiveCount() {
+    var activeTodos = gTodos.filter(function(todo){
+        return !todo.isDone
+    })
+    return activeTodos.length;
 }

@@ -14,7 +14,11 @@ function renderTodos() {
     })
 
     var elTodoList = document.querySelector('.todo-list');
-    elTodoList.innerHTML = strHTMLs.join('')
+    elTodoList.innerHTML = strHTMLs.join('');
+
+    document.querySelector('.total-count').innerText = getTotalCount();
+    document.querySelector('.active-count').innerText = getActiveCount();
+
 }
 
 
