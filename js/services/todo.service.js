@@ -1,6 +1,7 @@
-var gTodos = _createTodos();
+var gTodos = [];
+var gFilterBy = 'all';
 
-var gFilterBy = 'all'
+_createTodos();
 
 
 function getTodosForDisplay() {
@@ -24,7 +25,7 @@ function removeTodo(todoId) {
 
 function addTodo(txt) {
     var todo = {
-        id : 't' + (Date.now() % 100),
+        id : _makeId(),
         txt: txt,
         isDone: false
     }
@@ -60,14 +61,21 @@ function _saveTodosToStorage() {
 }
 
 function _createTodos() {
-
     var todos = loadFromStorage('todoDB')
-    if (!todos) {
-        todos = [
-            {id: 't101', txt: 'Learn HTML', isDone: false},
-            {id: 't102', txt: 'Master CSS', isDone: true},
-            {id: 't103', txt: 'Do JS', isDone: false}
-        ]
+    if (todos && todos.length) {
+        gTodos = todos
+    } else {
+        addTodo('Learn HTML');
+        addTodo('Master CSS');
+        addTodo('Practive JS');
     }
-    return todos;
+}
+
+function _makeId(length=5) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for(var i=0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return txt;
 }
