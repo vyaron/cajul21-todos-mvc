@@ -10,12 +10,22 @@
 <body onload="onInit()" >
     <h1>Todo MVC</h1>
 
+    <section class="todo-filter">
+        <h3>Filter Todos</h3>
+        <select onchange="onSetFilter(this.value)">
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="done">Done</option>
+        </select>
+    </section>
+
     <ul class="todo-list">
     </ul>
 
     <input name="newTodoTxt" type="text" placeholder="What need to be done" />
-    <button onclick="addTodo()">Add</button>
+    <button onclick="onAddTodo()">Add</button>
 
+    <script src="js/services/todo.service.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

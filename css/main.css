@@ -5,3 +5,8 @@ body {
 .done {
     text-decoration: line-through;
 }
+
+.todo-filter {
+    background-color: lightcyan;
+    padding: 10px;
+}
